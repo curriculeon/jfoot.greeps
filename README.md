@@ -13,7 +13,8 @@
         * the [Creature](https://curriculeon.github.io/jfoot.greeps/javadocs/com/github/curriculeon/greeps/Creature.html) class is the abstract superclass of the `Greep` class.
         * the [Greep](https://curriculeon.github.io/jfoot.greeps/javadocs/com/github/curriculeon/greeps/Greep.html) is a concrete subclass of the `Creature` class.
         * the [GreepSpit](https://curriculeon.github.io/jfoot.greeps/javadocs/com/github/curriculeon/greeps/GreepSpit.html) is a _composite child_ of `Greep`. It is the permissible only communication mechanism by `Greep`s.
-        * the [TomatoPile](https://curriculeon.github.io/jfoot.greeps/javadocs/com/github/curriculeon/greeps/TomatoPile.html) is a _composite child_ of `Greep`. It is the permissible only communication mechanism by `Greep`s.
+        * the [TomatoPile](https://curriculeon.github.io/jfoot.greeps/javadocs/com/github/curriculeon/greeps/TomatoPile.html) is where `Greep` gather resources. A `Greep` cannot retrieve from a `TomatoPile` unless another `Greep` is there to _load_ it onto the other `Greep` present at the same `TomatoPile`.
+
 * **Development Constraints**  
     1. Only change the class `Greep`. No other classes may be modified or 
 created.

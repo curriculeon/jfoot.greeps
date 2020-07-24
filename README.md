@@ -1,5 +1,5 @@
 # G R E E P S   I N V A S I O N
-![](./greeps-world.png)
+![](./greeps-world.gif)
 * **Purpose**
     * To establish familiarity with conditional statements
 * **Objective**

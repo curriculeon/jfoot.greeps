@@ -24,13 +24,21 @@ public class Greep extends Creature {
     @Override
     protected void behave() {
         if (isCarryingTomato()) {
+            returnToShip();
             if (isAtShip()) {
                 dropTomato();
             } else {
                 turnTowardsHome();
             }
+        } else {
+            if(isAtTomatoes()) {
+                waitForTomatoLoadingAssistance();
+                checkFood();
+                setImage(getCurrentImage());
+            } else {
+                seekTomatoPile();
+            }
         }
-        move();
     }
 
     private Boolean isToLeft(Actor actor) {
@@ -85,6 +93,8 @@ public class Greep extends Creature {
 
 
     public void returnToShip() {
+        if(super.isAtWater() || super.isAtWorldEdge()) turnRandomDegrees(200, 90);
+        move();
         turnTowardsHome(3);
         move();
     }
@@ -96,6 +106,7 @@ public class Greep extends Creature {
 
 
     public void seekTomatoPile() {
+        if(super.isAtWater() || super.isAtWorldEdge()) turnRandomDegrees();
         move();
     }
 

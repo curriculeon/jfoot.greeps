@@ -27,9 +27,49 @@ public class Greep extends Creature {
             if (isAtShip()) {
                 dropTomato();
             } else {
+               //
+                //turnRandomDegrees(1,1);
                 turnTowardsHome();
             }
         }
+        else if(!isCarryingTomato() && !isAtTomatoes()){
+           //
+            if(isAtWorldEdge())
+                //this with 70, 180 below is best combo so far at 74
+                //turnRandomDegrees(1,30);
+                //this with below 70, 180 also did 74
+                //turnRandomDegrees(5,30);
+                //this with -218, -360 below gave 75
+                //turnRandomDegrees(5,15);
+                //this with -210, -360 below gave 78
+                turnRandomDegrees(5,10);
+                //turnRandomDegrees(1,5);
+            seekTomatoPile();
+        }
+        else if(isWaitingForAssistance()) {
+            waitForTomatoLoadingAssistance();
+        }
+        else if(isAtTomatoes() && isWaitingForAssistance()) {
+            checkFood();
+        }
+        if(isAtWater()) {
+            //turnRandomDegrees();
+
+            //the best I've done on all three rounds, score 72
+            //turnRandomDegrees(70, 180);
+            //this with 5,30 above did 73
+            //turnRandomDegrees(-220, -360);
+            //this with 5, 15 above gave 77
+            //turnRandomDegrees(-210, -360);
+            //turnRandomDegrees(-210, -307);
+            turnRandomDegrees(-210, -360);
+
+            //negative turning works best for third pass
+            //turnRandomDegrees(-70, -180);
+
+
+        }
+
         move();
     }
 

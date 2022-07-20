@@ -26,7 +26,7 @@ public class Greep extends Creature {
         if (isCarryingTomato()) {
             if (isAtShip()) {
                 dropTomato();
-            } else if (isAtWater() || isAtWorldEdge()){
+            } else if (isAtWater() ){
                     turnRandomDegrees(15, 90);
                     move();}
 
@@ -45,18 +45,16 @@ public class Greep extends Creature {
         //if cant move and shouldSeekTomatoPile
         //turnRandomDegrees
 
-        if (isAtWater()){
-            turnRandomDegrees(15, 90);
-            move();
-        }
-        if (shouldSeekTomatoPile()){
-            seekTomatoPile();
+        if (isAtWater() || isAtWorldEdge()){
+           turnRandomDegrees(15, 90);
+           move();
+       }
+        //if (shouldSeekTomatoPile()){
+          //  seekTomatoPile();
         }
         //move();
         // if (isAtTomatoPile) {
         // stop moving and wait for some assistance
-    }
-
     private Boolean isToLeft(Actor actor) {
         int currentRotation = getRotation();
         turnTowards(actor);

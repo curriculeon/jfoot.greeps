@@ -26,11 +26,35 @@ public class Greep extends Creature {
         if (isCarryingTomato()) {
             if (isAtShip()) {
                 dropTomato();
-            } else {
-                turnTowardsHome();
-            }
+            } else if (isAtWater() || isAtWorldEdge()){
+                    turnRandomDegrees(15, 90);
+                    move();}
+
+                    else {
+                        turnTowardsHome(30);
+                }
+
+
+
         }
-        move();
+        if (isWaitingForAssistance()) {
+            waitForTomatoLoadingAssistance();
+        } else {
+            move();}
+
+        //if cant move and shouldSeekTomatoPile
+        //turnRandomDegrees
+
+        if (isAtWater()){
+            turnRandomDegrees(15, 90);
+            move();
+        }
+        if (shouldSeekTomatoPile()){
+            seekTomatoPile();
+        }
+        //move();
+        // if (isAtTomatoPile) {
+        // stop moving and wait for some assistance
     }
 
     private Boolean isToLeft(Actor actor) {

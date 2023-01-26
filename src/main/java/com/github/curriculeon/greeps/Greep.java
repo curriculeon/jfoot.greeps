@@ -129,7 +129,10 @@ public class Greep extends Creature {
     public void checkFood() {
         // check whether there's a tomato pile here
         if (isAtTomatoes()) {
+            getSurroundingTomatoPile();
             loadTomato();
+            returnToShip();
+            dropTomato();
             // Note: this attempts to load a tomato onto *another* Greep. It won't
             // do anything if we are alone here.
         }

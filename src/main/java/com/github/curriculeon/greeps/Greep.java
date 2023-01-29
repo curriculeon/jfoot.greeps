@@ -23,6 +23,9 @@ public class Greep extends Creature {
 
     @Override
     protected void behave() {
+        while (shouldSeekTomatoPile()){
+            seekTomatoPile();
+        }
         if (isCarryingTomato()) {
             if (isAtShip()) {
                 dropTomato();
@@ -30,9 +33,16 @@ public class Greep extends Creature {
                 turnTowardsHome();
             }
         }
-        move();
+        else{
+            while (isWaitingForAssistance()){
+            }
+            while(isWaitingToAssist()){
+            }
+        }
+        //move();
     }
 
+    //Returns true if actor is to the greep's left, and turns it to that direction
     private Boolean isToLeft(Actor actor) {
         int currentRotation = getRotation();
         turnTowards(actor);
@@ -59,7 +69,7 @@ public class Greep extends Creature {
         return isAtTomatoes() && !isCarryingTomato();
     }
 
-
+    //Returns true if another greep in the same pile is not carrying a tomato
     public Boolean isWaitingToAssist() {
         if (isAtTomatoes()) {
             for (Greep greep : getSurroundingTomatoPile().getIntersectingObjects(Greep.class)) {
@@ -97,9 +107,10 @@ public class Greep extends Creature {
 
     public void seekTomatoPile() {
         move();
+        //Add in something to avoid obstacles
     }
 
-
+    //Likely used to turn after encountering water
     public void turnRandomDegrees() {
         turnRandomDegrees(15, 90);
     }

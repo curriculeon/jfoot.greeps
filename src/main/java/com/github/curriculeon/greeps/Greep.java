@@ -23,8 +23,9 @@ public class Greep extends Creature {
 
     @Override
     protected void behave() {
+
         while (shouldSeekTomatoPile()){
-            seekTomatoPile();
+            seekTomatoPile();//Find a better way to make them move
         }
         if (isCarryingTomato()) {
             if (isAtShip()) {
@@ -39,7 +40,14 @@ public class Greep extends Creature {
             while(isWaitingToAssist()){
             }
         }
-        //move();
+
+         /*
+        move();
+        if(isAtWorldEdge()||isAtWater()){
+            turnRandomDegrees();
+        }
+
+          */
     }
 
     //Returns true if actor is to the greep's left, and turns it to that direction
@@ -101,12 +109,16 @@ public class Greep extends Creature {
 
 
     public Boolean shouldSeekTomatoPile() {
-        return !isCarryingTomato();
+        return (!isCarryingTomato()||!isAtTomatoes());
     }
 
 
     public void seekTomatoPile() {
         move();
+        if (this.isAtWater() || this.isAtWorldEdge()){
+            turnRandomDegrees();
+            move();
+        }
         //Add in something to avoid obstacles
     }
 

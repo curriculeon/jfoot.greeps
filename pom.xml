@@ -64,6 +64,20 @@
             <scope>test</scope>
         </dependency>
 
+        <!--JavaFX-->
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx</artifactId>
+            <version>15.0.1</version>
+            <type>pom</type>
+        </dependency>
+        <!--JavaFX-controls-->
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>15.0.1</version>
+        </dependency>
+
     </dependencies>
 
 

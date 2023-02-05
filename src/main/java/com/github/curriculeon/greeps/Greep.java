@@ -30,7 +30,25 @@ public class Greep extends Creature {
                 turnTowardsHome();
             }
         }
-        move();
+
+        if(RandomUtils.createBoolean(5.0F)) {
+            if(RandomUtils.createBoolean(50.0F))turnRandomDegrees(100,100);
+            else turnRandomDegrees(-10,-100);
+        }
+        move();   
+
+        if(isAtWorldEdge() || isAtWater()) {
+            turnRandomDegrees(30,90);
+            move();
+        }
+
+        checkFood();
+        
+        if(isWaitingForAssistance() || isWaitingToAssist()) {
+            turnTowards(getSurroundingTomatoPile());
+            loadTomato();
+        }
+        
     }
 
     private Boolean isToLeft(Actor actor) {

@@ -26,6 +26,8 @@ public class Greep extends Creature {
         if (isCarryingTomato()) {
             if (isAtShip()) {
                 dropTomato();
+            } else if (isAtWorldEdge() || isAtWater()){
+                turnRandomDegrees(10,90);
             } else {
                 turnTowardsHome();
             }
@@ -38,7 +40,7 @@ public class Greep extends Creature {
           checkFood();
 
         if(isAtWorldEdge() || isAtWater()) {
-            turnRandomDegrees(90,180);
+            turnRandomDegrees(10,90);
         }
         seekTomatoPile();
         

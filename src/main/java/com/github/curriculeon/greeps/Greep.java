@@ -35,13 +35,12 @@ public class Greep extends Creature {
             if(RandomUtils.createBoolean(50.0F))turnRandomDegrees(100,100);
             else turnRandomDegrees(-10,-100);
         }
-        move();   
+          
 
         if(isAtWorldEdge() || isAtWater()) {
-            turnRandomDegrees(65,90);
-            move();
+            turnRandomDegrees(90,90);
         }
-
+        move();
         checkFood();
         
         if(isWaitingForAssistance() || isWaitingToAssist()) {

@@ -53,32 +53,28 @@ public class Greep extends Creature {
         // Find a way for them to turn towards tomato piles.
 
         if (isCarryingTomato()){
+            if(isAtWorldEdge()||isAtWater()){
+                turnRandomDegrees(10,45);
+            }
+            //turnTowardsHome();
             returnToShip();
             if(isAtShip()){
                 dropTomato();
             }
         }
-        else if (isAtTomatoes()){
-            if (isWaitingToAssist()){
+        else if (isAtTomatoes()) {
+            if (isWaitingToAssist() || isWaitingForAssistance()) {
+                turnTowards(getSurroundingTomatoPile());
                 loadTomato();
-            }
-            else if(isWaitingForAssistance()){
-
+                //checkFood();
             }
         }
-        //else{
-        //    move();
-        //}
-
-        else{
-            seekTomatoPile();
+        else {
+            turnTowards(getSurroundingTomatoPile());
+            checkFood();
         }
-        /*if(shouldSeekTomatoPile()){
+        if (!isCarryingTomato())
             seekTomatoPile();
-        }*/
-
-
-
     }
 
     //Returns true if actor is to the greep's left, and turns it to that direction
@@ -135,9 +131,6 @@ public class Greep extends Creature {
 
     public void returnToShip() {
         turnTowardsHome(3);
-        if(isAtWorldEdge()||isAtWater()){
-            turnRandomDegrees(180, 360);
-        }
         move();
     }
 
@@ -148,9 +141,10 @@ public class Greep extends Creature {
 
 
     public void seekTomatoPile() {
+        turnTowards(getSurroundingTomatoPile());
         move();
         if (this.isAtWater() || this.isAtWorldEdge()){
-            turnRandomDegrees();
+            turnRandomDegrees(10,90);
         }
     }
 

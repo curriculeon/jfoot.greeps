@@ -53,28 +53,31 @@ public class Greep extends Creature {
         // Find a way for them to turn towards tomato piles.
 
         if (isCarryingTomato()){
-            if(isAtWorldEdge()||isAtWater()){
-                turnRandomDegrees(10,45);
-            }
-            //turnTowardsHome();
+            turnTowardsHome(3);
             returnToShip();
             if(isAtShip()){
                 dropTomato();
+            }
+
+            if(isAtWorldEdge()||isAtWater()){
+                turnRandomDegrees(10,45);
+
+
             }
         }
         else if (isAtTomatoes()) {
             if (isWaitingToAssist() || isWaitingForAssistance()) {
                 turnTowards(getSurroundingTomatoPile());
                 loadTomato();
-                //checkFood();
             }
         }
-        else {
-            turnTowards(getSurroundingTomatoPile());
-            checkFood();
-        }
-        if (!isCarryingTomato())
+        if (!isCarryingTomato()) {
+            if (isToLeft(getSurroundingTomatoPile())){
+                turnTowards(getSurroundingTomatoPile());
+            }
             seekTomatoPile();
+
+        }
     }
 
     //Returns true if actor is to the greep's left, and turns it to that direction
@@ -116,29 +119,24 @@ public class Greep extends Creature {
         return false;
     }
 
-
     public void waitForTomatoLoadingAssistance() {
         turnTowards(getSurroundingTomatoPile());
         move();
         loadTomato();
     }
 
-
     public Boolean isReturningToShip() {
         return isCarryingTomato();
     }
-
 
     public void returnToShip() {
         turnTowardsHome(3);
         move();
     }
 
-
     public Boolean shouldSeekTomatoPile() {
         return (!isCarryingTomato()||!isAtTomatoes());
     }
-
 
     public void seekTomatoPile() {
         turnTowards(getSurroundingTomatoPile());
@@ -153,11 +151,9 @@ public class Greep extends Creature {
         turnRandomDegrees(15, 90);
     }
 
-
     public void turnRandomDegrees(int minimumTurn, int maximumTurn) {
         turn(RandomUtils.createInteger(minimumTurn, maximumTurn));
     }
-
 
     public void turnRandomly(int minimumTurn, int maximumTurn, float likelihoodOfTurn) {
         if (minimumTurn > maximumTurn) {
@@ -183,7 +179,6 @@ public class Greep extends Creature {
             // do anything if we are alone here.
         }
     }
-
 
     /**
      * This method specifies the image we want displayed at any time. (No need

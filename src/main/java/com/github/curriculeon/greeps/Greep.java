@@ -46,28 +46,36 @@ public class Greep extends Creature {
          */
         //move();
 
-        if(isAtWorldEdge()||isAtWater()){
-            turnRandomDegrees(180, 360);
-        }
-        if (isAtTomatoes()){
-            if (isWaitingToAssist()){
-                loadTomato();
-            }
-            if(isWaitingForAssistance()){
-            }
-        }
-        else{
-            move();
-        }
+
+
+        //if(isToLeft(TomatoPile ))
+        //getSurroundingTomatoPile();
+        // Find a way for them to turn towards tomato piles.
+
         if (isCarryingTomato()){
             returnToShip();
             if(isAtShip()){
                 dropTomato();
             }
         }
-        else{
-            move();
+        else if (isAtTomatoes()){
+            if (isWaitingToAssist()){
+                loadTomato();
+            }
+            else if(isWaitingForAssistance()){
+
+            }
         }
+        //else{
+        //    move();
+        //}
+
+        else{
+            seekTomatoPile();
+        }
+        /*if(shouldSeekTomatoPile()){
+            seekTomatoPile();
+        }*/
 
 
 
@@ -127,6 +135,9 @@ public class Greep extends Creature {
 
     public void returnToShip() {
         turnTowardsHome(3);
+        if(isAtWorldEdge()||isAtWater()){
+            turnRandomDegrees(180, 360);
+        }
         move();
     }
 
@@ -140,9 +151,7 @@ public class Greep extends Creature {
         move();
         if (this.isAtWater() || this.isAtWorldEdge()){
             turnRandomDegrees();
-            move();
         }
-        //Add in something to avoid obstacles
     }
 
     //Likely used to turn after encountering water

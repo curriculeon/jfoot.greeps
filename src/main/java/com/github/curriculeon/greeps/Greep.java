@@ -2,7 +2,7 @@ package com.github.curriculeon.greeps;
 
 import com.github.git_leon.RandomUtils;
 import com.github.git_leon.jfoot.sprite.SpriteSensorDecorator;
-import greenfoot.Actor;
+import greenfoot.Actor;//k
 
 /**
  * A Greep is an alien creature that likes to collect tomatoes.
@@ -44,13 +44,6 @@ public class Greep extends Creature {
         }
 
          */
-        //move();
-
-
-
-        //if(isToLeft(TomatoPile ))
-        //getSurroundingTomatoPile();
-        // Find a way for them to turn towards tomato piles.
 
         if (isCarryingTomato()){
             turnTowardsHome(3);

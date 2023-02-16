@@ -2,7 +2,7 @@ package com.github.curriculeon.greeps;
 
 import com.github.git_leon.RandomUtils;
 import com.github.git_leon.jfoot.sprite.SpriteSensorDecorator;
-import greenfoot.Actor;
+import greenfoot.Actor;//k
 
 /**
  * A Greep is an alien creature that likes to collect tomatoes.
@@ -23,6 +23,12 @@ public class Greep extends Creature {
 
     @Override
     protected void behave() {
+        /*
+    }
+
+        while (shouldSeekTomatoPile()){
+            seekTomatoPile();//Find a better way to make them move
+        }
         if (isCarryingTomato()) {
             if (isAtShip()) {
                 dropTomato();
@@ -30,9 +36,44 @@ public class Greep extends Creature {
                 turnTowardsHome();
             }
         }
-        move();
+        else{
+            while (isWaitingForAssistance()){
+            }
+            while(isWaitingToAssist()){
+            }
+        }
+
+         */
+
+        if (isCarryingTomato()){
+            turnTowardsHome(3);
+            returnToShip();
+            if(isAtShip()){
+                dropTomato();
+            }
+
+            if(isAtWorldEdge()||isAtWater()){
+                turnRandomDegrees(10,45);
+
+
+            }
+        }
+        else if (isAtTomatoes()) {
+            if (isWaitingToAssist() || isWaitingForAssistance()) {
+                turnTowards(getSurroundingTomatoPile());
+                loadTomato();
+            }
+        }
+        if (!isCarryingTomato()) {
+            if (isToLeft(getSurroundingTomatoPile())){
+                turnTowards(getSurroundingTomatoPile());
+            }
+            seekTomatoPile();
+
+        }
     }
 
+    //Returns true if actor is to the greep's left, and turns it to that direction
     private Boolean isToLeft(Actor actor) {
         int currentRotation = getRotation();
         turnTowards(actor);
@@ -59,7 +100,7 @@ public class Greep extends Creature {
         return isAtTomatoes() && !isCarryingTomato();
     }
 
-
+    //Returns true if another greep in the same pile is not carrying a tomato
     public Boolean isWaitingToAssist() {
         if (isAtTomatoes()) {
             for (Greep greep : getSurroundingTomatoPile().getIntersectingObjects(Greep.class)) {
@@ -71,44 +112,41 @@ public class Greep extends Creature {
         return false;
     }
 
-
     public void waitForTomatoLoadingAssistance() {
         turnTowards(getSurroundingTomatoPile());
         move();
         loadTomato();
     }
 
-
     public Boolean isReturningToShip() {
         return isCarryingTomato();
     }
-
 
     public void returnToShip() {
         turnTowardsHome(3);
         move();
     }
 
-
     public Boolean shouldSeekTomatoPile() {
-        return !isCarryingTomato();
+        return (!isCarryingTomato()||!isAtTomatoes());
     }
-
 
     public void seekTomatoPile() {
+        turnTowards(getSurroundingTomatoPile());
         move();
+        if (this.isAtWater() || this.isAtWorldEdge()){
+            turnRandomDegrees(10,90);
+        }
     }
 
-
+    //Likely used to turn after encountering water
     public void turnRandomDegrees() {
         turnRandomDegrees(15, 90);
     }
 
-
     public void turnRandomDegrees(int minimumTurn, int maximumTurn) {
         turn(RandomUtils.createInteger(minimumTurn, maximumTurn));
     }
-
 
     public void turnRandomly(int minimumTurn, int maximumTurn, float likelihoodOfTurn) {
         if (minimumTurn > maximumTurn) {
@@ -134,7 +172,6 @@ public class Greep extends Creature {
             // do anything if we are alone here.
         }
     }
-
 
     /**
      * This method specifies the image we want displayed at any time. (No need

@@ -3,6 +3,7 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+
     <groupId>com.github.curriculeon.jfoot</groupId>
     <artifactId>greeps</artifactId>
     <version>1.0.0</version>
@@ -50,6 +51,12 @@
             <artifactId>javafx</artifactId>
             <version>15.0.1</version>
             <type>pom</type>
+        </dependency>
+        <!--JavaFX-controls-->
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>15.0.1</version>
         </dependency>
         
         <dependency>

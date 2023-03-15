@@ -117,7 +117,7 @@ public class Greep extends Creature {
 
 
     public void turnRandomDegrees() {
-        turnRandomDegrees(10, 90);
+        turnRandomDegrees(15, 90);
     }
 
 

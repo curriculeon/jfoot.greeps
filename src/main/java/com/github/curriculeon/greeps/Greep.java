@@ -26,11 +26,27 @@ public class Greep extends Creature {
         if (isCarryingTomato()) {
             if (isAtShip()) {
                 dropTomato();
+            } else if (isAtWorldEdge() || isAtWater()) {
+                turnRandomDegrees(10, 90);
             } else {
                 turnTowardsHome();
             }
         }
-        move();
+
+        if (!isCarryingTomato()) {
+            turnTowrads(getSurroundingTomatoPile());
+            checkFood();
+
+            if (isAtWorldEdge() || isAtWater()) {
+                turnRandomDegrees(10, 90);
+            }
+        }
+
+        if (isWaitingForAssistance() || isWaitingToAssist()) {
+            turnTowards(getsSurroundingTomatoPile());
+            loadTomato();
+        }
+        seekTomatoPile();
     }
 
     private Boolean isToLeft(Actor actor) {
@@ -153,6 +169,6 @@ public class Greep extends Creature {
      */
 
     public static String getAuthorName() {
-        return "Anonymous";
+        return "Mikail H.";
     }
 }

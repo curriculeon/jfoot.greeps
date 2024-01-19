@@ -26,11 +26,26 @@ public class Greep extends Creature {
         if (isCarryingTomato()) {
             if (isAtShip()) {
                 dropTomato();
-            } else {
-                turnTowardsHome();
+            } else if (!this.isAtWater()) {
+                returnToShip();
             }
+
+            move();
         }
-        move();
+        //
+        //
+        if(this.isAtWorldEdge() || this.isAtWater()){
+
+            turnRandomDegrees(20, 60);
+        }
+        if (shouldSeekTomatoPile()){
+            seekTomatoPile();
+            checkFood();
+            waitForTomatoLoadingAssistance();
+        }
+
+
+
     }
 
     private Boolean isToLeft(Actor actor) {
@@ -129,6 +144,7 @@ public class Greep extends Creature {
     public void checkFood() {
         // check whether there's a tomato pile here
         if (isAtTomatoes()) {
+            waitForTomatoLoadingAssistance();
             loadTomato();
             // Note: this attempts to load a tomato onto *another* Greep. It won't
             // do anything if we are alone here.

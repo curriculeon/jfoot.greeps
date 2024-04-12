@@ -69,6 +69,7 @@ public abstract class Creature extends Actor {
      * To avoid confusion/cheating, calling the built-in Greenfoot
      * move(int amount) does the same as the Creature move() function.
      */
+    @Deprecated
     @Override
     public final void move(int amount) {
         move();

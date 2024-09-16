@@ -17,7 +17,7 @@ public abstract class Creature extends Actor {
     private static final double WALKING_SPEED = 5.0;
     private static final int TIME_TO_SPIT = 10;
     private boolean carryingTomato = false; // Indicate whether we have a tomato with us
-    private Spaceship ship; // The creature's home ship
+    private Spaceship ship; // The creature's ship
     private boolean moved = false;
     private int timeToSpit = 0;
     private int memory; // General purpose memory

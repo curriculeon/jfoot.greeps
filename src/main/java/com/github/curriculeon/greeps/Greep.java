@@ -23,14 +23,57 @@ public class Greep extends Creature {
 
     @Override
     protected void behave() {
+        bringBackHome();
+        getUnstuck();
+        seekTomatoPile();
+        returnHome();
+        if(isAtTomatoes()){
+            waitForTomatoLoadingAssistance();
+            checkFood();
+        } else if (shouldSeekTomatoPile()) {
+            turnTowards(getSurroundingTomatoPile());
+        }
+    }
+
+    public Boolean isStuck(){
+        if (isAtWater() || isAtEdge() || !canMove()) {
+            return true;
+        }
+        return false;
+    }
+
+    public void getUnstuck (){
+        if( isStuck()){
+            turnRandomDegrees(15, 300);
+        }
+    }
+
+    public void bringBackHome() {
         if (isCarryingTomato()) {
-            if (isAtShip()) {
+            if(isStuck()) {
+                getUnstuck();
+            } else  if (isAtShip()) {
                 dropTomato();
-            } else {
+            } else{
                 turnTowardsHome();
             }
         }
-        move();
+    }
+    public Boolean cantReturnHome(){
+        if(isAtWater() || isCarryingTomato()){
+            return true;
+        }
+        return false;
+    }
+    public void avoid(){
+        if(isAtWater()){
+            turnOppositeDirection(45);
+        }
+}
+    public void returnHome (){
+        if(cantReturnHome()){
+           avoid();
+        }
     }
 
     private Boolean isToLeft(Actor actor) {

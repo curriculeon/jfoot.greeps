@@ -7,7 +7,7 @@ import greenfoot.Actor;
 /**
  * A Greep is an alien creature that likes to collect tomatoes.
  *
- * @author (your name here)
+ * @author (Christopher Fulton)
  * @version 0.1
  */
 public class Greep extends Creature {
@@ -16,19 +16,27 @@ public class Greep extends Creature {
      *
      * @param ship
      */
+
     public Greep(Spaceship ship) {
         super(ship);
         setImage(getCurrentImage());
+
     }
 
     @Override
     protected void behave() {
         if (isCarryingTomato()) {
+            returnToShip();
+            if(isAtWater())
+                turnRandomDegrees();
             if (isAtShip()) {
                 dropTomato();
-            } else {
-                turnTowardsHome();
             }
+        }
+        else {
+            seekTomatoPile();
+
+
         }
         move();
     }
@@ -86,7 +94,7 @@ public class Greep extends Creature {
 
     public void returnToShip() {
         turnTowardsHome(3);
-        move();
+
     }
 
 
@@ -96,7 +104,20 @@ public class Greep extends Creature {
 
 
     public void seekTomatoPile() {
-        move();
+
+        if(getSurroundingTomatoPile() != null) {
+            turnTowards(getSurroundingTomatoPile());
+            checkFood();
+
+
+        }
+        else{
+            if(isAtWater() || isAtWorldEdge())
+            turnRandomDegrees();
+
+        }
+//
+
     }
 
 
@@ -130,6 +151,7 @@ public class Greep extends Creature {
         // check whether there's a tomato pile here
         if (isAtTomatoes()) {
             loadTomato();
+
             // Note: this attempts to load a tomato onto *another* Greep. It won't
             // do anything if we are alone here.
         }

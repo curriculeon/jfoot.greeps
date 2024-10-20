@@ -1,5 +1,5 @@
 # G R E E P S   I N V A S I O N
-* **View the video walkthrough by clicking [here](https://curriculeon.github.io/jfoot.greeps/)
+* **View the video walkthrough by clicking [here](https://curriculeon.github.io/jfoot.greeps/)**
 
 ![](./greeps-world.gif)
 * **Purpose**
